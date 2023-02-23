@@ -118,4 +118,8 @@ configure_git () {
 }
 prompt "Coufigure git defaults" configure_git
 
+# Install zsh-autosuggestions
+# https://github.com/zsh-users/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
 printf "🎉  ${GREEN}Setup successfully finished!${NORMAL}"
