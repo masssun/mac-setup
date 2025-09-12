@@ -44,7 +44,7 @@ BOLD="$(tput bold)"
 NORMAL="$(tput sgr0)"
 
 # Progress tracking
-TOTAL_STEPS=8
+TOTAL_STEPS=9
 CURRENT_STEP=0
 
 # Helper functions
@@ -337,7 +337,30 @@ if [ -d "$HOME/.oh-my-zsh" ]; then
   fi
 fi
 
-# Step 8: Git configuration
+# Step 8: macOS System Settings
+print_step "Configuring macOS Settings"
+
+# Show hidden files in Finder
+print_info "Enabling hidden files in Finder..."
+if defaults read com.apple.finder AppleShowAllFiles 2>/dev/null | grep -q "1"; then
+  print_skip "Hidden files already visible in Finder"
+else
+  print_info "Setting Finder to show hidden files..."
+  if defaults write com.apple.finder AppleShowAllFiles true; then
+    print_success "Hidden files enabled in Finder"
+    print_info "Restarting Finder to apply changes..."
+    if killall Finder 2>/dev/null; then
+      print_success "Finder restarted successfully"
+    else
+      print_warning "Could not restart Finder automatically"
+      print_info "Please restart Finder manually or press Cmd+Option+Esc"
+    fi
+  else
+    print_error "Failed to enable hidden files in Finder (continuing)"
+  fi
+fi
+
+# Step 9: Git configuration
 print_step "Configuring Git"
 
 # Check for existing SSH key
