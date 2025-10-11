@@ -3,7 +3,9 @@
 # ╔══════════════════════════════════════════════════════════════════════════════════════════╗
 # ║                                      Configuration                                       ║
 # ╚══════════════════════════════════════════════════════════════════════════════════════════╝
-apps=()
+apps=(
+  google-cloud-sdk
+)
 
 # Fonts (installed via Homebrew Cask)
 fonts=(
@@ -12,14 +14,21 @@ fonts=(
 )
 
 brews=(
+  asdf
+  berglas
   ffmpeg
   fzf
   gh
   ghq
   go
-  nvm
+  lcov
   peco
-  rbenv
+  # ruby-build に必要なパッケージ https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
+  openssl@3
+  readline
+  libyaml
+  gmp
+  autoconf
 )
 
 # Packages that require special taps
