@@ -23,6 +23,7 @@ brews=(
   go
   lcov
   peco
+  supabase/tap/supabase
   # ruby-build に必要なパッケージ https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
   openssl@3
   readline
