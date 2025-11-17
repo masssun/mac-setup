@@ -16,6 +16,7 @@ fonts=(
 
 brews=(
   asdf
+  autifyhq/tap/autify-cli
   berglas
   ffmpeg
   fzf
