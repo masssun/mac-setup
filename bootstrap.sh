@@ -17,14 +17,19 @@ fonts=(
 brews=(
   asdf
   autifyhq/tap/autify-cli
+  bat
   berglas
+  fd
   ffmpeg
   fzf
   gh
   ghq
   go
   lcov
+  lima
   peco
+  pinact
+  protobuf
   supabase/tap/supabase
   uv
   # ruby-build に必要なパッケージ https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
