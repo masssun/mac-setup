@@ -30,6 +30,8 @@ brews=(
   peco
   pinact
   protobuf
+  ruff
+  shellcheck
   supabase/tap/supabase
   uv
   # ruby-build に必要なパッケージ https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
