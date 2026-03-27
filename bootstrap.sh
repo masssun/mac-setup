@@ -33,6 +33,7 @@ brews=(
   ruff
   shellcheck
   supabase/tap/supabase
+  tmux
   uv
   # ruby-build に必要なパッケージ https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
   openssl@3
