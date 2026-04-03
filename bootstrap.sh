@@ -203,9 +203,8 @@ else
     # Add to .zprofile for zsh (permanent)
     if ! grep -q "$BREW_PREFIX/bin/brew shellenv" "$HOME/.zprofile" 2>/dev/null; then
       print_info "Adding Homebrew to .zprofile..."
-      echo '' >> "$HOME/.zprofile"
-      echo '# Homebrew' >> "$HOME/.zprofile"
-      echo 'eval "$('$BREW_PREFIX'/bin/brew shellenv)"' >> "$HOME/.zprofile"
+      # shellcheck disable=SC2016
+      { echo ''; echo '# Homebrew'; echo 'eval "$('$BREW_PREFIX'/bin/brew shellenv)"'; } >> "$HOME/.zprofile"
       print_success "Homebrew PATH configured for zsh"
     else
       print_skip "Homebrew already in .zprofile"
@@ -417,12 +416,13 @@ fi
 # Configure git settings
 print_info "Applying git configurations..."
 for config in "${git_configs[@]}"; do
-  current_value=$(git config --global --get ${config%% *} 2>/dev/null)
+  current_value=$(git config --global --get "${config%% *}" 2>/dev/null)
   expected_value=${config#* }
 
   if [ "$current_value" = "$expected_value" ]; then
     print_skip "git config $config"
   else
+    # shellcheck disable=SC2086
     if git config --global $config; then
       print_success "Set: git config --global $config"
     else
@@ -466,10 +466,6 @@ fi
 # Final summary
 echo ""
 print_header "Setup Complete!"
-
-# Count what was installed vs skipped
-installed_count=0
-skipped_count=0
 
 echo "${GREEN}${BOLD}🎉 Your Mac development environment is ready!${NORMAL}"
 echo ""
