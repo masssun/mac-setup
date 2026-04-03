@@ -4,7 +4,6 @@
 # ║                                      Configuration                                       ║
 # ╚══════════════════════════════════════════════════════════════════════════════════════════╝
 apps=(
-  claude-code
   google-cloud-sdk
 )
 
@@ -65,7 +64,7 @@ BOLD="$(tput bold)"
 NORMAL="$(tput sgr0)"
 
 # Progress tracking
-TOTAL_STEPS=9
+TOTAL_STEPS=10
 CURRENT_STEP=0
 
 # Helper functions
@@ -282,7 +281,21 @@ if [ ${#tap_packages[@]} -gt 0 ]; then
   done
 fi
 
-# Step 5: Install fonts
+# Step 5: Claude Code
+print_step "Installing Claude Code"
+if check_command claude; then
+  print_skip "Claude Code"
+else
+  print_info "Installing Claude Code via native installer..."
+  if curl -fsSL https://claude.ai/install.sh | bash &>/dev/null; then
+    print_success "Claude Code installed successfully"
+  else
+    print_error "Failed to install Claude Code (continuing)"
+    print_info "You can install manually: curl -fsSL https://claude.ai/install.sh | bash"
+  fi
+fi
+
+# Step 6: Install fonts
 print_step "Installing Fonts"
 if [ ${#fonts[@]} -gt 0 ]; then
   print_info "Installing fonts for terminal applications..."
@@ -308,7 +321,7 @@ else
   print_skip "No fonts to install"
 fi
 
-# Step 6: Set default shell to zsh
+# Step 7: Set default shell to zsh
 print_step "Setting default shell to zsh"
 if [ "$SHELL" = "/bin/zsh" ]; then
   print_skip "Default shell already set to zsh"
@@ -323,7 +336,7 @@ else
   fi
 fi
 
-# Step 7: Oh My Zsh
+# Step 8: Oh My Zsh
 print_step "Installing Oh My Zsh"
 if [ -d "$HOME/.oh-my-zsh" ]; then
   print_skip "Oh My Zsh"
@@ -358,7 +371,7 @@ if [ -d "$HOME/.oh-my-zsh" ]; then
   fi
 fi
 
-# Step 8: macOS System Settings
+# Step 9: macOS System Settings
 print_step "Configuring macOS Settings"
 
 # Show hidden files in Finder
@@ -381,7 +394,7 @@ else
   fi
 fi
 
-# Step 9: Git configuration
+# Step 10: Git configuration
 print_step "Configuring Git"
 
 # Check for existing SSH key
